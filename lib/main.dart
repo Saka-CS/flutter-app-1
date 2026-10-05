@@ -10,36 +10,50 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
+    //   final scheme = ColorScheme.fromSeed(seedColor: Colors.indigo);
+    //   return MaterialApp(
+    //     title: 'Flutter Demo',
+    //     theme: ThemeData(
+    //       useMaterial3: true,
+    //       colorScheme: scheme,
+    //       filledButtonTheme: FilledButtonThemeData(
+    //         style: FilledButton.styleFrom(
+    //           backgroundColor: scheme.secondary,
+    //           foregroundColor: scheme.onSecondary,
+    //         ),
+    //       ),
+    //     ),
+    //     home: const MyHomePage(title: 'Videos'),
+    //   );
+    // }
+    ThemeData buildTheme(ColorScheme scheme) {
+      return ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.orangeAccent),
-        filledButtonTheme: FilledButtonThemeData(
+        colorScheme: scheme,
+        textButtonTheme: TextButtonThemeData(
           style: FilledButton.styleFrom(
-            backgroundColor: Colors.amber[100],
-            foregroundColor: Colors.brown[900],
-            // shape: RoundedRectangleBorder(
-            //   borderRadius: BorderRadius.circular(12),
-            // ),
+            backgroundColor: scheme.tertiary,
+            foregroundColor: scheme.onTertiary,
           ),
         ),
-      ),
+      );
+    }
+
+    final lightSchema = ColorScheme.fromSeed(
+      seedColor: Colors.indigo,
+      brightness: Brightness.light,
+    );
+
+    final darkSchema = ColorScheme.fromSeed(
+      seedColor: Colors.indigo,
+      brightness: Brightness.dark,
+    );
+
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: buildTheme(lightSchema),
+      darkTheme: buildTheme(darkSchema),
+      themeMode: ThemeMode.light,
       home: const MyHomePage(title: 'Videos'),
     );
   }
@@ -138,11 +152,17 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: .start,
           children: [
             Row(
+              spacing: 6,
               children: [
-                FilledButton.icon(
+                TextButton.icon(
                   onPressed: () {},
                   icon: Icon(Icons.library_music_rounded),
                   label: Text("Music"),
+                ),
+                TextButton.icon(
+                  onPressed: () {},
+                  icon: Icon(Icons.privacy_tip),
+                  label: Text("Privacy"),
                 ),
               ],
             ),
@@ -164,7 +184,10 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
+        shape: const CircleBorder(),
+        child: const Icon(Icons.play_arrow, size: 50),
       ),
     );
   }
