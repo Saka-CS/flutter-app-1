@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'ui/account_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -115,7 +117,14 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.search)),
           IconButton(onPressed: () {}, icon: Icon(Icons.layers_outlined)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.account_circle)),
+          IconButton(
+            onPressed: () {
+              Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (_) => const AccountScreen()));
+            },
+            icon: Icon(Icons.account_circle),
+          ),
         ],
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -123,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Theme.of(context).colorScheme.inversePrimary,
+                Theme.of(context).colorScheme.primaryFixedDim,
                 Theme.of(context).colorScheme.surface,
               ],
             ),
