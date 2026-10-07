@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'ui/account_screen.dart';
+import 'ui/widgets/settings_dialog.dart';
 
 void main() {
   runApp(const MyApp());
@@ -116,7 +117,13 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.layers_outlined)),
+          IconButton(
+            onPressed: () => showDialog(
+              context: context,
+              builder: (_) => const ViewSettingsDialog(),
+            ),
+            icon: Icon(Icons.layers_outlined),
+          ),
           IconButton(
             onPressed: () {
               Navigator.of(
